@@ -16,9 +16,6 @@
 	$banco=conexao::getConexao();
 
 
-	public function getDatabase(){
-		$this ->database = $database;
-	}
 
 
 	?>
