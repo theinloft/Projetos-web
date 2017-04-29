@@ -2,6 +2,10 @@
 //class.conexao.php
 
     require_once('class.bancodedados.php');
+
+    $database = 'cliente';
+
+
     abstract class conexao {
 	public static function getConexao()	{
 	$db=new banco ('mysql');
@@ -10,4 +14,11 @@
 	}
 	}
 	$banco=conexao::getConexao();
+
+
+	public function getDatabase(){
+		$this ->database = $database;
+	}
+
+
 	?>
