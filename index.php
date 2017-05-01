@@ -1,4 +1,7 @@
 <?php
+function __autoload($class_name){
+require_once 'classes/' . $class_name . '.php';
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -7,11 +10,41 @@
 	<title>Teste</title>
 </head>
 <body>
+	<?php
+			$cliente = new Cliente();
+
+		
 
 
-<form action="classes/class.dao.php" method="post">
+			if(isset($_POST['cadastrar'])):
+
+				$nome = $_POST['nome'];
+				$telefone = $_POST['telefone'];
+
+				
+
+				$cliente->setNome($nome);
+				$cliente->setTelefone($telefone);
+				//metodo de inserção
+				$cliente->insert();
 
 
+				if($cliente->insert() && !empty($nome) && !empty($telefone)){
+					
+					echo '<div class="alert alert-success" role="alert">Cliente inserido com sucesso.</div>';
+				}
+
+				endif;
+
+
+
+
+
+	?>
+
+
+
+<form method="POST" action="">
 
 
 	<div class="form-group">
@@ -25,7 +58,7 @@
 			<input type="tel" name="telefone" class="form-control" placeholder="Telefone">
 		
 	</div>
-	<button type="submit" class="btn btn-default" action="create">Enviar</button>
+	<button type="submit" class="btn btn-default" name="cadastrar" >Enviar</button>
 
 
 

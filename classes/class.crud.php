@@ -12,7 +12,7 @@ abstract public function update($id);
 
 public function find($id){
 	$sql = "SELECT * FROM $this->tabela WHERE id = :id";
-	$stmt = DB:prepare($sql);
+	$stmt = DB::prepare($sql);
 	$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 	$stmt->execute();
 	return $stmt->fetch();
