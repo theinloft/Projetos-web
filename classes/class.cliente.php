@@ -1,6 +1,7 @@
 <?php
+//https://www.youtube.com/watch?v=Y-0OQto_reA
 
-public class cliente{
+public class cliente extends Crud{
 
 private $id;
 private $nome;
@@ -30,9 +31,22 @@ public function setNome($nome){
 }
 
 public function setTelefone($telefone){
-	return $this->telefone = $telefoneS;
+	return $this->telefone = $telefone;
 }
 
+
+public function insert(){
+	$sql = "INSERT INTO this->tabela(nome,telefone) VALUES (:nome, :telefone)";
+	$stmt = DB::prepare($sql);
+	$stmt = bindParam(':nome',$nome);
+	$stmt = bindParam(':email', $telefone);
+	return $stmt->execute();
+
+}
+
+public function update($id){
+
+}
 
 }
 

@@ -1,9 +1,4 @@
 <?php
-require_once('classes/class.conexao.php');
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,7 +9,8 @@ require_once('classes/class.conexao.php');
 <body>
 
 
-<form action="#">
+<form action="classes/class.dao.php" method="post">
+
 
 
 
@@ -29,7 +25,7 @@ require_once('classes/class.conexao.php');
 			<input type="tel" name="telefone" class="form-control" placeholder="Telefone">
 		
 	</div>
-	<button type="submit" class="btn btn-default">Enviar</button>
+	<button type="submit" class="btn btn-default" action="create">Enviar</button>
 
 
 
