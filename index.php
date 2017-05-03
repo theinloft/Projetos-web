@@ -5,10 +5,13 @@
 	?>
 
 <!DOCTYPE html>
-	<html>
+
+<html>
 		<head>
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 			<link rel="stylesheet" href="css/estilos.css">
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 				<title>Teste</title>
 		</head>
 			<body>
@@ -40,10 +43,40 @@
 							endif;
 
 
-
-
-
+								if(isset($_POST['atualizar'])):
+									$id = $_POST['id'];
+									$nome = $_POST['nome'];
+									$telefone = $_POST['telefone'];
+									$cliente->setNome($nome);
+									$cliente->setTelefone($telefone);
+									if($cliente->update($id)){
+										echo '<br><div class="alert alert-success" role="alert"> Atualizado com sucesso!</div>';
+										}
+								endif;
 					?>
+
+					<?php
+							if(isset($_GET['acao']) && $_GET['acao'] == 'deletar'):
+								$id = (int)$_GET['id'];
+								if($cliente->delete($id)){
+									echo 'br><div class="alert alert-success" role="alert">Deletado com sucesso!</div>';
+								}
+							endif;
+							?>
+
+							<?php
+							if(isset($_GET['acao']) && $_GET['acao'] == 'editar'){
+								$id = (int)$_GET['id'];
+								$resultado = $cliente->find($id);
+						
+							?>
+
+		
+
+
+		
+
+<?php } ?>
 
 
 						<div class="panel panel-default">
@@ -68,5 +101,69 @@
 								</form>
 							</div>
 						</div>
+
+							<table class="table table-bordered">
+  								<?php foreach ($cliente->findAll() as $key => $value): ?>
+  									
+  							
+			  									<tr>
+			  										<th>ID</th><th>Nome</th><th>Telefone</th>
+			  									</tr>
+			  									<tr>
+			  										<td> <?php echo $value->id; ?> </td><td> <?php echo $value->nome; ?> </td><td> <?php echo $value->telefone; ?> </td>
+
+			  									
+			  										<td>
+			  											<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Editar</button>
+
+																	<!-- Modal -->
+																	<div id="myModal" class="modal fade" role="dialog">
+																	  <div class="modal-dialog">
+
+																	    <!-- Modal content-->
+																	    <div class="modal-content">
+																	      <div class="modal-header">
+																	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+																	        <h4 class="modal-title">Editar Cliente</h4>
+																	      </div>
+																			      <div class="modal-body">
+																			       
+																									<form method="post" action="">
+																											<div class="input-prepend">
+																												<span class="add-on"><i class="icon-user"></i></span>
+																												<div class="form-control">
+																												<input type="text" name="nome" value="<?php echo $resultado->nome; ?>" placeholder="Nome:" />
+																												</div>
+																											</div>
+																											<div class="input-prepend">
+																												<span class="add-on"><i class="icon-envelope"></i></span>
+																												<div class="form-control">
+																												<input type="tel" name="telefone" value="<?php echo $resultado->telefone; ?>" placeholder="Telefone:" />
+																												</div>
+																											</div>
+																											<input type="hidden" name="id" value="<?php echo $resultado->id; ?>">
+																											<br />
+																											<input type="submit" name="atualizar" class="btn btn-primary" value="Atualizar dados">					
+																									</form>
+
+																			      </div>
+																			      <div class="modal-footer">
+																			        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+																			      </div>
+																	    </div>
+
+																	  </div>
+																	</div>
+
+
+														<?php echo "<a href='index.php?acao=editar&id=" . $value->id . "'>Editar</a>"; ?>
+														<?php echo "<a href='index.php?acao=deletar&id=" . $value->id . "' onclick='return confirm(\"Deseja realmente deletar?\")'>Deletar</a>"; ?>
+													</td>
+												</tr>
+  								<?php endforeach ?>
+
+						    </table>
+						</div>
+
 				</body>
 		</html>
