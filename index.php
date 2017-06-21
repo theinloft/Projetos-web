@@ -114,7 +114,8 @@
 
 			  									
 			  										<td>
-			  											<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Editar</button>
+			  											<button type="button" class="btn btn-info btn-lg"
+														   data-toggle="modal" data-target="#myModal">Editar</button>
 
 																	<!-- Modal -->
 																	<div id="myModal" class="modal fade" role="dialog">
@@ -130,16 +131,16 @@
 																			       
 																									<form method="post" action="">
 																											<div class="input-prepend">
-																												<span class="add-on"><i class="icon-user"></i></span>
-																												<div class="form-control">
-																												<input type="text" name="nome" value="<?php echo $resultado->nome; ?>" placeholder="Nome:" />
-																												</div>
+																												<label class="control-label"  for="nome">Nome:</label>
+																												
+																												<input type="text" name="nome" value="<?php echo $resultado->nome; ?>" class="form-control" /></label>
+																												
 																											</div>
 																											<div class="input-prepend">
-																												<span class="add-on"><i class="icon-envelope"></i></span>
-																												<div class="form-control">
-																												<input type="tel" name="telefone" value="<?php echo $resultado->telefone; ?>" placeholder="Telefone:" />
-																												</div>
+																												<label class="control-label"  for="telefone">Telefone:</label>
+																												
+																												<input type="tel" name="telefone" value="<?php echo $resultado->telefone; ?>" placeholder="Telefone:" class="form-control"/>
+																												
 																											</div>
 																											<input type="hidden" name="id" value="<?php echo $resultado->id; ?>">
 																											<br />
@@ -156,8 +157,28 @@
 																	</div>
 
 
-														<?php echo "<a href='index.php?acao=editar&id=" . $value->id . "'>Editar</a>"; ?>
-														<?php echo "<a href='index.php?acao=deletar&id=" . $value->id . "' onclick='return confirm(\"Deseja realmente deletar?\")'>Deletar</a>"; ?>
+														<button class="btn btn-danger" data-href="index.php?acao=deletar&id= . $value->id ." data-toggle="modal" data-target="#confirm-delete">
+    Delete
+</button>
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                ...
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-danger btn-ok">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+														
+														
 													</td>
 												</tr>
   								<?php endforeach ?>
